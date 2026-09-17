@@ -1,0 +1,43 @@
+@red: #a3a3a3;
+@color-base:rgb(177, 178, 218);
+@fuente-base:14px;
+@color-acento:rgb(10, 10, 10);
+.menu{
+    background-color:@red;
+}
+header h1{
+    text-align: center;
+}
+.menu ul{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+    gap:10px;
+    list-style: none;
+    justify-content: space-between;
+}
+nav a{
+    text-decoration: none;
+    color: black;
+}
+//MIXIN
+.generar-alertas(@n) when (@n > 0){
+    .alerta-@{n} {
+        background-color: darken(@color-base, @n *8%);
+        font-size: @fuente-base + (@n * 2);
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius:5px;
+        font-family: Arial, sans-serif;
+        color: darken(@color-acento, 10%);
+        //CASO CRÍTICO
+        & when (@n = 3){
+            border:5px solid blue;
+            font-weight: bold;
+            color: #fff;
+        }
+    }
+    //Caso Recursivo:
+    .generar-alertas(@n - 1);
+}
+.generar-alertas(5);
